@@ -8,30 +8,14 @@
 
 void swapping_num(listint_t *a, listint_t *b)
 {
-    listint_t *temp_prev = a->prev;
-    listint_t *temp_next = a->next;
-
-    a->prev = b->prev;
-    a->next = b->next;
-
-    b->prev = temp_prev;
-    b->next = temp_next;
-
-    if (a->prev)
-        a->prev->next = a;
-    else
-        a->prev = a;
-
-    if (a->next)
-        a->next->prev = a;
-
-    if (b->prev)
-        b->prev->next = b;
-    else
-        b->prev = b;
-
-    if (b->next)
-        b->next->prev = b;
+	if (a->prev)
+		a->prev->next = b;
+	if (b->next)
+		b->next->prev = a;
+	a->next = b->next;
+	b->prev = a->prev;
+	a->prev = b;
+	b->next = a;
 }
 
 /**
