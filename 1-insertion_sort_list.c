@@ -1,28 +1,26 @@
 #include "sort.h"
 
 /**
- * swapping_num - func
- * @a: inputs
- * @b: in
-*/
-
+ * swapping_num - Swaps two nodes in a doubly linked list
+ * @a: First node
+ * @b: Second node
+ */
 void swapping_num(listint_t *a, listint_t *b)
 {
 	if (a->prev)
 		a->prev->next = b;
 	if (b->next)
 		b->next->prev = a;
-	a->next = b->next;
 	b->prev = a->prev;
+	a->next = b->next;
 	a->prev = b;
 	b->next = a;
 }
 
 /**
- * insertion_sort_list - func
- * @list: inputs
-*/
-
+ * insertion_sort_list - Sorts a doubly linked list using insertion sort
+ * @list: Double pointer to the head of the list
+ */
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *avant, *apres;
@@ -35,21 +33,12 @@ void insertion_sort_list(listint_t **list)
 	{
 		apres = avant;
 		avant = avant->next;
-		while (apres && apres->prev)
+		while (apres && apres->prev && apres->n < apres->prev->n)
 		{
-			if (apres->prev->n > apres->n)
-			{
-				swapping_num(apres->prev, apres);
-				if (apres->prev)
-					*list = apres;
-			}
-			else
-			{
-				apres = apres->prev;
-			}
+			swapping_num(apres->prev, apres);
+			if (!apres->prev)
+				*list = apres;
+			print_list(*list);
 		}
-
 	}
-
 }
-
